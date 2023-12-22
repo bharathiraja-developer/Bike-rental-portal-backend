@@ -115,10 +115,10 @@ const userController = {
 
   bookBike: async (request, response) => {
     try {
-      const { id, userId } = request.body;
+      const { id, username } = request.body;
 
       const bike = await bikes.findById(id);
-      const user = await User.findById(userId);
+      const user = await User.findOne({ username });
       const available = bike.details.Available - 1;
       const Details = {
         ...bike.details,

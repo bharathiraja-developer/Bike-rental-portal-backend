@@ -4,7 +4,6 @@ const config = require("../utils/config");
 const authMiddleware = {
   verifyToken: (req, res, next) => {
     const token = req.headers.authorization;
-
     if (!token) {
       return res
         .status(401)
