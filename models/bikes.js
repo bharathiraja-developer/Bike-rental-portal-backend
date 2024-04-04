@@ -13,6 +13,7 @@ const bikeSchema = new mongoose.Schema({
     brand: String,
     fuel: String,
     Available: Number,
+    BookedAt: String,
   },
 });
 
