@@ -125,13 +125,14 @@ const userController = {
         ...bike.details,
         Available: available,
       };
+      let bikedetail = {
+        ...bike,
+        BookedAt: `${date.getDate()}-${date.getMonth() + 1}-${
+          date.getFullYear
+        }`,
+      };
       const booked = await User.updateOne(user, {
-        bookings: [
-          ...user.bookings,
-          [...bike][
-            `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear}`
-          ],
-        ],
+        bookings: [...user.bookings, bikedetail],
       });
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
       response.status(200).json({ message: "Bike booked successfully" });
