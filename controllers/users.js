@@ -120,8 +120,12 @@ const userController = {
       const bike = await bikes.findById(id);
       const user = await User.findOne({ username });
       const available = bike.details.Available - 1;
+      let date = new Date();
       const Details = {
         ...bike.details,
+        BookedAt: `${date.getDate()}-${date.getMonth() + 1}-${
+          date.getFullYear
+        }`,
         Available: available,
       };
       const booked = await User.updateOne(user, {
