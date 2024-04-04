@@ -128,7 +128,7 @@ const userController = {
       const booked = await User.updateOne(user, {
         bookings: [
           ...user.bookings,
-          [bike][
+          [...bike][
             `${date.getDate()}-${date.getMonth() + 1}-${date.getFullYear}`
           ],
         ],
