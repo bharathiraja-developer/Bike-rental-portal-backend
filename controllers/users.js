@@ -136,6 +136,7 @@ const userController = {
         bookings: [...user.bookings, bike],
       });
       let bookdetails = {
+        bikedetail: { ...bike },
         bookedAt: `${date.getDate()}-${
           date.getMonth() + 1
         }-${date.getFullYear()}`,
