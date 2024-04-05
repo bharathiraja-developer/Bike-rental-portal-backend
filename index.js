@@ -4,6 +4,7 @@ const express = require("express");
 const cors = require("cors");
 const bikeRouter = require("./routes/bikeRoutes");
 const userRouter = require("./routes/userRoutes");
+const bookRouter = require("./routes/bookRoutes");
 
 const app = express();
 mongoose.set("strictQuery", false);
@@ -22,6 +23,7 @@ app.use(cors());
 app.use(express.json());
 app.use("/api/bikes", bikeRouter);
 app.use("/api/users", userRouter);
+app.use("/api/bookings", bookRouter);
 
 app.listen(config.PORT, () => {
   console.log("Server running successfully");

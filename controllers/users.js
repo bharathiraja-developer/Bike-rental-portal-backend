@@ -4,6 +4,7 @@ const User = require("../models/users");
 const bikes = require("../models/bikes");
 const config = require("../utils/config");
 const nodemailer = require("nodemailer");
+const bookings = require("../models/bookings");
 
 const userController = {
   signup: async (request, response) => {
@@ -115,26 +116,36 @@ const userController = {
 
   bookBike: async (request, response) => {
     try {
-      const { id, username } = request.body;
+      const { id, username, detail } = request.body;
 
       const bike = await bikes.findById(id);
       const user = await User.findOne({ username });
+      const book = await bookings.findOne({ username });
       const available = bike.details.Available - 1;
       let date = new Date();
       const Details = {
         ...bike.details,
         Available: available,
       };
-      let bikedetail = {
-        ...bike,
-        BookedAt: `${date.getDate()}-${date.getMonth() + 1}-${
-          date.getFullYear
-        }`,
-      };
       const booked = await User.updateOne(user, {
-        bookings: [...user.bookings, bikedetail],
+        bookings: [...user.bookings, bike],
       });
+      const bookingDetails = [
+        ...book.details,
+        {
+          ...bike,
+          bookedAt: `${date.getDate()}-${
+            date.getMonth() + 1
+          }-${date.getFullYear()}`,
+          location: detail.location,
+          pick: detail.pick,
+          drop: detail.drop,
+        },
+      ];
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
+      const booking = await bookings.updateOne(book, {
+        details: bookingDetails,
+      });
       response.status(200).json({ message: "Bike booked successfully" });
     } catch (error) {
       response.status(500).json({ error: error.message });
