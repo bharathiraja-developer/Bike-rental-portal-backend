@@ -137,9 +137,9 @@ const userController = {
       });
       let bookdetails = {
         bikedetail: { ...bike },
-        bookedAt: `${date.getDate()}-${
+        bookedAt: `${date.getFullYear()}-${
           date.getMonth() + 1
-        }-${date.getFullYear()}`,
+        }-${date.getDate()}`,
         pick: detail.pick,
         drop: detail.drop,
       };
