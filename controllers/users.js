@@ -27,8 +27,13 @@ const userController = {
         bookings: [],
         passwordHash,
       });
+      const book = new bookings({
+        username: body.username,
+        details: [],
+      });
 
       const savedUser = await user.save();
+      const savedBook = await book.save();
 
       response
         .status(201)
