@@ -142,15 +142,13 @@ const userController = {
           bookedAt: `${date.getDate()}-${
             date.getMonth() + 1
           }-${date.getFullYear()}`,
-          location: detail.location,
           pick: detail.pick,
           drop: detail.drop,
         },
       ];
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
-      const booking = await bookings.findOneAndReplace(book, {
-        username,
-        details,
+      const booking = await bookings.updateOne(book, {
+        details: details,
       });
       response.status(200).json({ message: "Bike booked successfully" });
     } catch (error) {
