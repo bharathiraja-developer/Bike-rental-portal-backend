@@ -148,9 +148,12 @@ const userController = {
         },
       ];
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
-      const booking = await bookings.replaceOne(book, {
-        details: details,
-      });
+      const booking = await bookings.replaceOne(
+        { username },
+        {
+          details: details,
+        }
+      );
       response.status(200).json({ message: "Bike booked successfully" });
     } catch (error) {
       response.status(500).json({ error: error.message });
