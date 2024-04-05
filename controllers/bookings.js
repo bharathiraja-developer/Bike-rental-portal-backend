@@ -2,7 +2,7 @@ const booking = require("../models/bookings");
 
 const bookController = {
   showbike: async (req, res) => {
-    const username = req.params.username;
+    const username = req.params.email;
     try {
       const Bookings = await booking.findOne({ username });
       res.json(Bookings);
