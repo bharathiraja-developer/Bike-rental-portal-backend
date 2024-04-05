@@ -3,7 +3,7 @@ const booking = require("../models/bookings");
 const bookController = {
   showbike: async (req, res) => {
     try {
-      const { username } = req.body;
+      const username = req.body;
       const Bookings = await booking.findOne({ username });
       res.json(Bookings);
     } catch (error) {
