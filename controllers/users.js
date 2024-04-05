@@ -135,8 +135,7 @@ const userController = {
       const booked = await User.updateOne(user, {
         bookings: [...user.bookings, bike],
       });
-      const details = {
-        ...bike,
+      const bookdetails = {
         bookedAt: `${date.getDate()}-${
           date.getMonth() + 1
         }-${date.getFullYear()}`,
@@ -145,7 +144,7 @@ const userController = {
       };
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
       const booking = await bookings.updateOne(book, {
-        details: [...book.details, details],
+        details: [...book.details, bookdetails],
       });
       response.status(200).json({ message: "Bike booked successfully" });
     } catch (error) {
