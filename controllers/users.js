@@ -4,7 +4,7 @@ const User = require("../models/users");
 const bikes = require("../models/bikes");
 const config = require("../utils/config");
 const nodemailer = require("nodemailer");
-const bookings = require("../models/bookings");
+const booking = require("../models/bookings");
 
 const userController = {
   signup: async (request, response) => {
@@ -125,7 +125,7 @@ const userController = {
 
       const bike = await bikes.findById(id);
       const user = await User.findOne({ username });
-      const book = await bookings.findOne({ username });
+      const book = await booking.findOne({ username });
       const available = bike.details.Available - 1;
       let date = new Date();
       const Details = {
@@ -135,7 +135,7 @@ const userController = {
       const booked = await User.updateOne(user, {
         bookings: [...user.bookings, bike],
       });
-      const bookdetails = {
+      let bookdetails = {
         bookedAt: `${date.getDate()}-${
           date.getMonth() + 1
         }-${date.getFullYear()}`,
@@ -143,7 +143,7 @@ const userController = {
         drop: detail.drop,
       };
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
-      const booking = await bookings.updateOne(book, {
+      const bookingdetail = await booking.updateOne(book, {
         details: [...book.details, bookdetails],
       });
       response.status(200).json({ message: "Bike booked successfully" });
