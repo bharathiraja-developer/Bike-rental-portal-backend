@@ -135,7 +135,7 @@ const userController = {
       const booked = await User.updateOne(user, {
         bookings: [...user.bookings, bike],
       });
-      const bookingDetails = [
+      const details = [
         ...book.details,
         {
           ...bike,
@@ -148,8 +148,8 @@ const userController = {
         },
       ];
       const bikeBook = await bikes.findByIdAndUpdate(id, { details: Details });
-      const booking = await bookings.updateOne(book, {
-        details: bookingDetails,
+      const booking = await bookings.replaceOne(book, {
+        details: details,
       });
       response.status(200).json({ message: "Bike booked successfully" });
     } catch (error) {
