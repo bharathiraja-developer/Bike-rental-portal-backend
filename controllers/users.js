@@ -10,6 +10,7 @@ const userController = {
   signup: async (request, response) => {
     try {
       const body = request.body;
+      console.log(body);
       if (!body.password || body.password.length < 3) {
         return response.status(400).json({
           error: "password must be at least 3 characters long",

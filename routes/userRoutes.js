@@ -2,7 +2,7 @@ const userRouter = require("express").Router();
 const userController = require("../controllers/users");
 const authMiddleware = require("../middleware/authmiddleware");
 
-userRouter.post("/", userController.signup);
+userRouter.post("/signup", userController.signup);
 userRouter.get("/list", userController.getUserList);
 userRouter.post("/signin", userController.signin);
 userRouter.patch("/forget", userController.forget);
