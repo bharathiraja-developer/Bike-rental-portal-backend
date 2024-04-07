@@ -27,7 +27,7 @@ const userController = {
         bookings: [],
         passwordHash,
       });
-      const book = new bookings({
+      const book = new booking({
         username: body.username,
         details: [],
       });
